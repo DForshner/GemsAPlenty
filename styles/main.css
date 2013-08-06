@@ -1,16 +1,65 @@
+/* Cancels any default margin added to body element by the browser */
 body {
-	margin : 0;
+  margin : 0;
 }
 
+/*
+Game Related
+*/
+
 #game {
-	position : absolute;
-	left : 0;
-	right : 0;
-	width : 320px;
-	hight : 480px;
-	background-color : rgb (30,30,30);
+  position : absolute;
+  left : 0;
+  right : 0;
+  width : 320px;
+  height : 480px;
+
+  /* dark gray backround */
+  background-color : rgb(30,30,30);
+
+  /* Setup main font */
+  font-family : Geo;
+  color : rgb(200,200,100);
 }
 
 #game .screen {
-	
+  position : absolute;
+  width : 100%;
+  height : 100%;
+  display : none; /* screens are hidden by default */
+  z-index : 10;
+}
+
+#game .screen.active {
+  display : block;
+}
+
+
+/*
+Splash Screen
+*/
+
+#splash-screen {
+  text-align : center;
+  padding-top : 100px;
+}
+
+#splash-screen .continue {
+  cursor : pointer;
+  font-size: 30px;
+}
+
+.logo {
+  font-family : Slackey;
+  font-size : 60px;
+  line-height : 60px;
+  margin : 20px;
+  text-align : center;
+  /* Green */
+  color : rgb(70,120,20); 
+  /* yellow outline with drop shadow */
+  text-shadow :
+    1px 1px 2px rgb(255,255,0),
+    -1px -1px 2px rgb(255,255,0),
+    5px 8px 8px rgb(0,0,0);
 }
