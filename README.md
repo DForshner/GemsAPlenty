@@ -1,4 +1,4 @@
 GemsAPlenty
 ===========
 
-A Bejeweled clone written in HTML5
+A Bejeweled-like game written in HTML5
