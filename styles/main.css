@@ -1,0 +1,16 @@
+body {
+	margin : 0;
+}
+
+#game {
+	position : absolute;
+	left : 0;
+	right : 0;
+	width : 320px;
+	hight : 480px;
+	background-color : rgb (30,30,30);
+}
+
+#game .screen {
+	
+}
