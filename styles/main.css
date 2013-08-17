@@ -1,18 +1,29 @@
 /* Cancels any default margin added to body element by the browser */
 body {
   margin : 0;
+
+  /* Disable press down for callout behavior */
+  -webkit-touch-callout: none;
+  /* Remove highlights from clickable links */  
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  /* Disable text size re-adjustment on orientation change */
+  -webkit-text-size-adjustment: none;
+  /* Disable user text/image selection */
+  -webkit-user-select: none;
 }
 
 /*
-Game Related
-*/
+ * Game Related
+ */
 
 #game {
   position : absolute;
   left : 0;
   right : 0;
-  width : 320px;
-  height : 480px;
+
+  font-size : 40px; 
+  width : 8em; /* 320 */
+  height : 12em; /* 480 */
 
   /* dark gray backround */
   background-color : rgb(30,30,30);
@@ -36,30 +47,72 @@ Game Related
 
 
 /*
-Splash Screen
-*/
+ *Splash Screen
+ */
 
 #splash-screen {
   text-align : center;
-  padding-top : 100px;
+  padding-top : 2.0em;
 }
 
 #splash-screen .continue {
   cursor : pointer;
-  font-size: 30px;
+  font-size: 0.75em;
 }
 
 .logo {
   font-family : Slackey;
-  font-size : 60px;
-  line-height : 60px;
-  margin : 20px;
+  font-size :  1.5em; /* 60 px */
+  line-height : 0.9em;
+  margin : 10px;
   text-align : center;
   /* Green */
   color : rgb(70,120,20); 
   /* yellow outline with drop shadow */
   text-shadow :
-    1px 1px 2px rgb(255,255,0),
-    -1px -1px 2px rgb(255,255,0),
-    5px 8px 8px rgb(0,0,0);
+    0.03em 0.03px 0.03em rgb(255,255,0),
+    -0.03em -0.03em -0.03px rgb(255,255,0),
+    0.10em 0.15em 0.15em rgb(0,0,0);
+}
+
+/*
+ * Main Menu
+ */
+
+#main-menu {
+  padding-top : 1em;
+}
+
+ul.menu {
+  text-align : center;
+  padding : 0;
+  margin : 0;
+  list-style : none;
+}
+
+ul.menu li {
+  margin : 0.8em 0;
+}
+
+ul.menu li button {
+  font-family : Slackey, sans-serif;
+  font-size : 0.6em;
+  color : rgb(100, 120, 0);
+  width : 8em;
+  height : 1.5em;
+  background : rgb(10,20,0);
+  border : 0.1em solid rgb(255, 255, 0);
+  border-radius : 0.5em;
+  box-shadow : 0.2em 0.2em 0.3em rgb(0,0,0);
+  p-webkit-box-shadow : 0.2em 0.2em 0.3em rgb(0,0,0); /* webkit browsers */
+  -moz-box-shadow : 0.2em 0.2em 0.3 rgb(0,0,0); /* firefox */
+}
+
+ul.menu li button.hover {
+  backround : rgb(30,40,0);
+}
+
+ul.menu li button.active {
+  color : rgb(255,255,0);
+  background : rgb(30, 40, 0);
 }

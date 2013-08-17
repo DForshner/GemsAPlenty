@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="styles/fontfaces.css"/>
     <script src="scripts/modernizr.js"></script>
     <script src="scripts/loader.js"></script>
+    <meta name="viewport" 
+      content="width=device-width, user-scalable=no">
   </head>
   <body>
     <!-- overall game container -->
@@ -17,7 +19,15 @@
         <span>Click to continue</span>
       </div>
 
-      <div class="screen" id="main-menu"></div>
+      <div class="screen" id="main-menu">
+        <h2 class="logo">Gems a Plenty!</h2>
+        <ul class="menu">
+          <li><button name="game-screen">Play</button>
+          <li><button name="hiscore">Highscore</button>
+          <li><button name="about">About</button>
+          <li><button name="exit">Exit</button>
+        </ul>
+      </div>
 
       <div class="screen" id="game-screen"></div>
 

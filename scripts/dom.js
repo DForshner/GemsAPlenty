@@ -3,6 +3,7 @@
 //
 jewel.dom = (function() {
   // Private
+  
   var $ = Sizzle;
 
   // Returns true if class is found
@@ -11,6 +12,7 @@ jewel.dom = (function() {
     return regex.test(el.className);
   }
 
+  // Adds class to CSS element
   function addClass(el, clsName) {
     if (!hasClass(el, clsName)) {
       el.className += " " + clsName;
@@ -19,15 +21,32 @@ jewel.dom = (function() {
 
   // Removes CSS class from element
   function removeClass(el, clsName) {
-    var regex = new RegExp("(^|\\s)" + clsName + "(\\s|$");
+    var regex = new RegExp("(^|\\s)" + clsName + "(\\s|$)");
     el.className = el.className.replace(regex, " ");
   }
 
+  // finds element based on selector and attaches handler to event
+  function bind(el, event, handler) {
+    // If type is string use selector to find element otherwise
+    // assume DOM element is being passed. 
+    if (typeof el == "string") {
+      el = $(el)[0];
+    }
+    el.addEventListener(event, handler, false);
+  }
+ 
+
+
+
+
+
   return {
     // Public
+    
     $ : $,
     hasClass : hasClass,
     addClass : addClass,
-    removeClass : removeClass
+    removeClass : removeClass,
+    bind : bind
   };
 })();
