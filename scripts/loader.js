@@ -2,7 +2,7 @@
 var jewel = {
 
   /* Namespaces */
-  screens : {}
+  screens : {},
 
   /* Game settings */
   settings : {
