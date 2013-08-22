@@ -5,7 +5,6 @@ this.fake2x2Settings = {
     baseScore : 10,
     numJewelTypes : 3,
 };
-
 // 21
 // 01
 this.fake2x2BoardLayout = [ [0,2], [1,1] ];
@@ -23,36 +22,35 @@ this.fake4x4Settings = {
 // 0111
 this.fake4x4BoardLayout = [ [0,0,0,0], [1,1,1,1], [1,2,3,2], [1,3,2,3] ];
 
-test("init_WhenInitBoardUsingPreMadeBoardLayout_ExpectLayoutUsed", function () {
+test("init_WhenInitBoardUsingPreMadeBoardLayout_ExpectLayoutUsed", function() {
   // Arrange
   jewel.board.init(fake2x2Settings, function(){}, { 'boardLayout' : fake2x2BoardLayout}); 
-  // Act
+  // Act & Assert
   equal(jewel.board.getJewel(0,0), 0);
   equal(jewel.board.getJewel(0,1), 2);
   equal(jewel.board.getJewel(1,0), 1);
   equal(jewel.board.getJewel(1,1), 1);
-  // Assert
 });
 
-test("getJewel_WhenInit2x2Board_ExpectJewelAtPosition1x1", function () {
+test("getJewel_WhenInit2x2Board_ExpectJewelAtPosition1x1", function() {
   // Arrange
-  jewel.board.init(fake2x2Settings, function(){}, {});
+  jewel.board.init(fake4x4Settings, function(){}, {});
   // Act
   var result = jewel.board.getJewel(1,1)
   // Assert
   notEqual(result, -1);
 });
 
-test("getJewel_WhenInit2x2Board_ExpectNoJewelAtPosition3x1", function () {
+test("getJewel_WhenInit2x2Board_ExpectNoJewelAtPosition4x1", function () {
   // Arrange
-  jewel.board.init(fake2x2Settings, function(){}, {});
+  jewel.board.init(fake4x4Settings, function(){}, {});
   // Act
-  var result = jewel.board.getJewel(3,1)
+  var result = jewel.board.getJewel(4,1)
   // Assert
   equal(result, -1);
 });
 
-test("checkChain_When3ChainExists_Expect3", function () {
+test("checkChain_When3ChainExists_Expect3", function() {
   // Arrange
   jewel.board.init(fake4x4Settings, function(){}, { 'boardLayout' : fake4x4BoardLayout});
   // Act
@@ -91,7 +89,7 @@ test("canSwap_WhenSwapCreatsChainLengthLessThanTwo_ExpectFalse", function () {
 
 test("isAdjacent_WhenInitAdjacentJewels_ExpectTrue", function () {
   // Arrange
-  jewel.board.init(fake2x2Settings, function(){}, {}); 
+  jewel.board.init(fake4x4Settings, function(){}, {}); 
   // Act
   var result = jewel.board.isAdjacent(0,0,0,1)
   // Assert
@@ -100,7 +98,7 @@ test("isAdjacent_WhenInitAdjacentJewels_ExpectTrue", function () {
 
 test("isAdjacent_WhenInitAdjacentJewels_ExpectFalse", function () {
   // Arrange
-  jewel.board.init(fake2x2Settings, function(){}, {}); 
+  jewel.board.init(fake4x4Settings, function(){}, {}); 
   // Act
   var result = jewel.board.isAdjacent(0,0,1,1)
   // Assert

@@ -5,12 +5,8 @@
 jewel.board = (function() {
   // Private
 
-  var settings,
-  jewels,
-  cols,
-  rows,
-  baseScore,
-  numJewelTypes;
+  var settings, jewels, cols, 
+  rows, baseScore, numJewelTypes;
 
   // Initializes board
   // boardLayout (optional) - Use predefined layout when filling board.
@@ -20,6 +16,10 @@ jewel.board = (function() {
     baseScore = settings.baseScore;
     cols = settings.cols;
     rows = settings.rows;
+
+    // Pre-conditions
+    console.assert(rows > 2, "Board must be larger than 2x2");
+    console.assert(cols > 2, "Board must be larger than 2x2");
 
     if (opts["boardLayout"]) {
       jewels = opts["boardLayout"];
@@ -31,23 +31,27 @@ jewel.board = (function() {
     callback();
   }
 
-  // Init grid and fill it with random jewels
+  // Init grid and fill it with random jewels.
   function fillBoard() {
     var x, y;
-    // Init x array 
+    // Start filling board from top-right working towards bottom left. 
     jewels = [];
     for (x = 0; x < cols; x++) {
       // Init one y array per x array
       jewels[x] = [];
       for (y = 0; y < rows; y++) {
         type = randomJewel();
-        // Keep picking randome jewels until the chain condition is not
-        // met. 
+        // Check left 2 positions and up two positions to see if
+        // we would be making a chain.
         while (
+          // Check left 2 positions.
           (type === getJewel(x-1, y) && type === getJewel(x-2,y) )
+          // Check up 2 positions.
           || (type === getJewel(x, y-1) && type === getJewel(x, y-2) )
         )
         {
+          // Keep picking random jewels until we find one that
+          // won't form a chain.
           type = randomJewel();
         }
         jewels[x][y] = type;
@@ -176,7 +180,7 @@ jewel.board = (function() {
   // arrays.
   function check(events) {
     var chains = getChains(),
-    hadChains = false, var score = 0,
+    hadChains = false, score = 0,
     removed = [], moved = [], gaps = [];
     
     for (var x = 0; x < cols; x++) {
@@ -205,7 +209,7 @@ jewel.board = (function() {
             fromY : y,
             type : getJewel(x,y)
           });
-          jewels.[x][y + gaps[x]] = getJewel(x,y);
+          jewels[x][y] + gaps[x] = getJewel(x,y);
         }
       }
 
@@ -270,14 +274,26 @@ jewel.board = (function() {
   }
 
   // Returns true if (x,y) is a valid position and if the jewel
-  // at (x,y) can be swapped with a neighbore.
-  function canMove(x,y) {
-    return (
-      (x > 0 && canSwap(x,y,x-1,y))
-      || (x < cols-1 && canSwap(x,y,x+1,y))
-      || (y > 0 && canSwap(x,y,x,y-1))
-      || (y < rows-1 && canSwap(x,y,x,y+1)) 
-    );
+  // at (x,y) can be swapped with a neighbor.
+  function canJewelMove(x,y) {
+      
+      // Can swap with left
+      if (x > 0 && canSwap(x,y,x-1,y))
+        return true;
+
+      // Can swap with right
+      if (x < (cols-1) && canSwap(x,y,x+1,y))
+        return true;
+
+      // Can swap with down
+      if (y > 0 && canSwap(x,y,x,y-1))
+        return true;
+      
+      // Can swap with up
+      if (y < (rows-1) && canSwap(x,y,x,y+1))
+        return true;
+
+      return false;
   }
 
   // Creates copy of board
@@ -293,7 +309,7 @@ jewel.board = (function() {
 
   // if possible, swaps (x1,y1) and (x2,y2) and calls
   // the callback function with a list of events.
-  function swap(x1, y1, x2, y2) {
+  function swap(x1, y1, x2, y2, callback) {
     var temp, events;
 
     if (canSwap(x1,y1,x2,y2)) {
