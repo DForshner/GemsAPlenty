@@ -1,4 +1,4 @@
 GemsAPlenty
 ===========
 
-A Bejeweled-like game written in HTML5
+An in-progress Bejeweled-like game written in JavaScript/HTML5
